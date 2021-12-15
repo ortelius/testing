@@ -23,7 +23,7 @@ public class DetailsTab_stepDefinition {
 
     @When("{actor} is modified below values in Details tab")
     public void user_is_modified_below_values_in_details_tab(Actor actor, io.cucumber.datatable.DataTable dataTable) {
-        actor.attemptsTo(DetailsTab.changeValues(dataTable));
+        // actor.attemptsTo(DetailsTab.changeValues(dataTable));
     }
 
     @When("{actor} click on Save button")
@@ -33,6 +33,6 @@ public class DetailsTab_stepDefinition {
 
     @Then("{actor} is able to see updated values in details tab")
     public void user_is_able_to_see_updated_values_in_details_tab(Actor actor, io.cucumber.datatable.DataTable dataTable) {
-        actor.attemptsTo(DetailsTab.verifyChangeValues(dataTable));
+       // actor.attemptsTo(DetailsTab.verifyChangeValues(dataTable));
     }
 }

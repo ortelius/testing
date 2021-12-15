@@ -22,7 +22,7 @@ public class Login {
 
         return Task.where("{0} Enter user name }" + userName,
                 WaitUntil.the(txtUserName, isEnabled())
-                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                         .seconds(),
                 Enter.theValue(userName).into(txtUserName));
 

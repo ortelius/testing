@@ -8,15 +8,13 @@ import net.serenitybdd.screenplay.Consequence;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.MoveMouse;
-import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.conditions.Check;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.targets.Target;
+import net.serenitybdd.screenplay.waits.Wait;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.pages.components.HtmlTable;
 import org.hamcrest.Matcher;
@@ -39,6 +37,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnab
 
 public class DetailsTab {
 
+    public static By iconHangOn = By.cssSelector("div[class='blockUI blockMsg blockPage']");
+    //public static Target iconHangOn = Target.the("Hang On Icon").located(By.cssSelector("div[class='blockUI blockMsg blockPage']"));
     public static Target lstFullDomainName = Target.the("Full Domain Name").located(By.name("fulldomain_val"));
     public static Target txtName = Target.the("Name").located(By.name("name_val"));
     public static Target txtDescription = Target.the("Description").located(By.name("summary_val"));
@@ -57,26 +57,35 @@ public class DetailsTab {
             .located(By.name("fail_template_val"));
 
     public static By tblDetail = By.id("summ");
-
+    public static String chkSpecificVersion = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]/td[1]";
+    public static String chkSpecificRow = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]";
 
     public static Performable openVersionFromWebTable(String version) {
 
-        System.out.println(version);
+        By locCheckbox = By.xpath(chkSpecificVersion.replace("<VERSION>", version));
+        By locRow = By.xpath(chkSpecificRow.replace("<VERSION>", version));
 
-        HtmlTable table = new HtmlTable(BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$("#applist"));
-        WebElement obj = table.findFirstRowWhere()
-                .findElement(By.xpath("//td[text()='Hipster Store;July 4th Sale;4 - Testing']"));
-        System.out.println(obj.getText());
-        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).withAction().doubleClick(obj);
-        //evaluateJavascript("$('#firstname').click()");
+        WebElementFacade chk = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locCheckbox);
+        WebElementFacade row = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locRow);
 
-        return  Task.where("{0} Open Specific Version " + version);
+        return  Task.where("{0} Open Specific Version " + version,
+                  MoveMouse.to(locCheckbox).andThen(action -> action.click(chk)),
+                  MoveMouse.to(locRow).andThen(action -> action.doubleClick(row))
+            );
 
     }
 
     public static Performable clickOnEditButton() {
 
-        return  Task.where("Click on Edit Button ", Click.on(Button.called("Edit")));
+        return  Task.where("Click on Edit Button ",
+
+                WaitUntil.the(Button.called("Edit"), isEnabled())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds(),
+
+                JavaScriptClick.on(Button.called("Edit"))
+
+        );
     }
 
     public static Performable changeValues(DataTable dataTable) {
@@ -139,24 +148,28 @@ public class DetailsTab {
 
     public static Performable verifyChangeValues(DataTable dataTable) {
 
-        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
+//        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
+//
+//        String fullDomainName = details.get(0).get("Full Domain");
+//        String name = details.get(0).get("Name");
+//        String description = details.get(0).get("Description");
+//        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
+//        String preAction = details.get(0).get("Pre-Action");
+//        String postAction = details.get(0).get("Post-Action");
+//        String customAction= details.get(0).get("Custom-Action");
+//        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
+//        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
+//
+//        HtmlTable table = new HtmlTable(BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(tblDetail));
+//        Map<Object,String> colValue = table.getRows().get(1);
+//        System.out.println(colValue.values());
 
-        String fullDomainName = details.get(0).get("Full Domain");
-        String name = details.get(0).get("Name");
-        String description = details.get(0).get("Description");
-        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
-        String preAction = details.get(0).get("Pre-Action");
-        String postAction = details.get(0).get("Post-Action");
-        String customAction= details.get(0).get("Custom-Action");
-        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
-        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
+//            return  Task.where("Verify values in Detail tab ",
+//                    OnStage.theActorInTheSpotlight().should(seeThat("Verify Full Domain Name",
+//                            OnStage.theActorInTheSpotlight().asksFor(Text.of(lstFullDomainName)),
+//                            hasValue("Test")));
 
-        HtmlTable table = new HtmlTable(BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(tblDetail));
-        Map<Object,String> colValue = table.getRows().get(1);
-        System.out.println(colValue.values());
+            return  Task.where("Verify values in Detail tab ");
 
-        return  Task.where("Verify values in Detail tab ");
     }
-
-
 }
