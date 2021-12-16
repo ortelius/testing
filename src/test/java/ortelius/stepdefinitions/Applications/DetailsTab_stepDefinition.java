@@ -4,10 +4,15 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.questions.Text;
+import org.openqa.selenium.By;
 import ortelius.task.Applications.DetailsTab;
 
 import java.util.List;
 import java.util.Map;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.hasValue;
 
 public class DetailsTab_stepDefinition {
 
@@ -23,12 +28,12 @@ public class DetailsTab_stepDefinition {
 
     @When("{actor} is modified below values in Details tab")
     public void user_is_modified_below_values_in_details_tab(Actor actor, io.cucumber.datatable.DataTable dataTable) {
-        // actor.attemptsTo(DetailsTab.changeValues(dataTable));
+        actor.attemptsTo(DetailsTab.changeValues(dataTable));
     }
 
     @When("{actor} click on Save button")
     public void user_click_on_save_button(Actor actor) {
-        actor.attemptsTo(DetailsTab.clickOnSaveButton());
+        //actor.attemptsTo(DetailsTab.clickOnSaveButton());
     }
 
     @Then("{actor} is able to see updated values in details tab")
