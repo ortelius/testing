@@ -5,12 +5,22 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.ensure.web.ElementLocated;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
+import net.serenitybdd.screenplay.questions.WebElementQuestion;
+import net.serenitybdd.screenplay.waits.WaitUntil;
+import ortelius.task.Applications.ApplicationHomePage;
 import ortelius.task.GeneralComponents;
 import ortelius.task.Login;
+import ortelius.utilities.ReusableMethod;
 
 import java.time.Duration;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 public class Login_stepDefinition {
 
@@ -36,6 +46,14 @@ public class Login_stepDefinition {
 
     @Then("{actor} is able to view Home page")
     public void userIsAbleToViewHomePage(Actor actor) {
-      actor.attemptsTo(Login.verifyHomePage());
+
+      //  BrowseTheWeb.as(actor).getDriver().navigate().refresh();
+
+        WaitUntil.the(ApplicationHomePage.tblDomain, isEnabled())
+                .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
+                .seconds();
+
+        actor.should(seeThat(WebElementQuestion.the(ApplicationHomePage.tblDomain),
+                WebElementStateMatchers.isEnabled()));
     }
 }

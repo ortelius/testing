@@ -7,10 +7,7 @@ import net.serenitybdd.screenplay.AnonymousPerformableFunction;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.JavaScriptClick;
-import net.serenitybdd.screenplay.actions.MoveMouse;
-import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.conditions.Check;
 import net.serenitybdd.screenplay.questions.Text;
@@ -19,6 +16,7 @@ import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
@@ -49,14 +47,11 @@ public class DetailsTab {
     public static Target lstFailedDeploymentTemplate = Target.the("Failed Deployment Template")
             .located(By.name("fail_template_val"));
 
-    public static By tblDetail = By.id("summ");
-    public static String chkSpecificVersion = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]/td[1]";
-    public static String chkSpecificRow = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]";
 
     public static Performable openVersionFromWebTable(String version) {
 
-        By locCheckbox = By.xpath(chkSpecificVersion.replace("<VERSION>", version));
-        By locRow = By.xpath(chkSpecificRow.replace("<VERSION>", version));
+        By locCheckbox = By.xpath(ApplicationHomePage.chkSpecificVersion.replace("<VERSION>", version));
+        By locRow = By.xpath(ApplicationHomePage.chkSpecificRow.replace("<VERSION>", version));
 
         WebElementFacade chk = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locCheckbox);
         WebElementFacade row = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locRow);
@@ -106,41 +101,41 @@ public class DetailsTab {
         String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
         String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
 
+        System.out.println(fullDomainName);
+
         return Task.where("Enter values in Detail tab",
 
                 Check.whether(fullDomainName == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(fullDomainName)
+                        .otherwise(SelectFromOptions.byValue("705")
                                .from(lstFullDomainName)),
 
-                Check.whether(name== "null")
-                        .otherwise(SelectFromOptions.byVisibleText(name)
-                                .from(txtName)),
+                Check.whether(name == "null")
+                        .otherwise(Enter.theValue(name).into(txtName)),
 
-                Check.whether(description== "null")
-                        .otherwise(SelectFromOptions.byVisibleText(description)
-                                .from(txtDescription)),
+                Check.whether(description == "null")
+                        .otherwise(Enter.theValue(description).into(txtDescription)),
 
-                Check.whether(changeRequestDataSource== "null")
+                Check.whether(changeRequestDataSource == "null")
                         .otherwise(SelectFromOptions.byVisibleText(changeRequestDataSource)
                                 .from(lstChangeRequestDataSource)),
 
-                Check.whether(preAction== "null")
+                Check.whether(preAction == "null")
                         .otherwise(SelectFromOptions.byVisibleText(preAction)
                                 .from(lstPreAction)),
 
-                Check.whether(postAction== "null")
+                Check.whether(postAction == "null")
                         .otherwise(SelectFromOptions.byVisibleText(postAction)
                                 .from(lstPostAction)),
 
-                Check.whether(customAction== "null")
+                Check.whether(customAction == "null")
                         .otherwise(SelectFromOptions.byVisibleText(customAction)
                                 .from(lstCustomAction)),
 
-                Check.whether(successfullDeploymentTemplate== "null")
+                Check.whether(successfullDeploymentTemplate == "null")
                         .otherwise(SelectFromOptions.byVisibleText(successfullDeploymentTemplate)
                                 .from(lstSuccessfulDeploymentTemplate)),
 
-                Check.whether(failedDeploymentTemplate== "null")
+                Check.whether(failedDeploymentTemplate == "null")
                         .otherwise(SelectFromOptions.byVisibleText(failedDeploymentTemplate)
                                 .from(lstFailedDeploymentTemplate))
                 );

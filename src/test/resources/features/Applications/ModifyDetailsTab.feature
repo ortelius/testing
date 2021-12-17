@@ -17,12 +17,12 @@ Feature: Verify Application Details functionality
       And User is modified below values in Details tab
 
         | Full Domain | Name | Description | Change Request Data Source | Pre-Action               | Post-Action              | Custom-Action            | Successfull Deployment Template | Failed Deployment Template |
-        |             |      |             |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
+        |             |      | Test        |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
 
       And User click on Save button
       Then User is able to see updated values in details tab
 
         | Full Domain | Name | Description | Change Request Data Source | Pre-Action               | Post-Action              | Custom-Action            | Successfull Deployment Template | Failed Deployment Template |
-        |             |      |             |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
+        |             |      | Test        |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
 
 
