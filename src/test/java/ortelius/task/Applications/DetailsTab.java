@@ -95,10 +95,9 @@ public class DetailsTab {
         );
     }
 
-
-
     public static Performable clickOnSaveButton() {
-        return  Task.where("Click on Save Button ", Click.on(Button.called("Save")));
+        return  Task.where("Click on Save Button ",
+                Click.on(Button.called("Save")));
     }
 
     public static void verifyChangeValues(DataTable dataTable) {

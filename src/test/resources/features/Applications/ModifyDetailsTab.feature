@@ -17,11 +17,11 @@ Feature: Verify Application Details functionality
       And User is modified below values in Details tab
 
         | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
-        | GLOBAL.Ortelius | <NA> | Auto123     | <NA>                       | <NA>       | <NA>        | <NA>          | <NA>                            | <NA>                       |
+        | GLOBAL.Ortelius.Online Store Company.Hipster Store.Prod |      | Auto1111    |                            |            |             |               |                                 |                            |
 
       And User click on Save button
       Then User is able to see updated values in details tab
 
         | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
-        | GLOBAL.Ortelius | <NA> | Auto123     | <NA>                       | <NA>       | <NA>        | <NA>          | <NA>                            | <NA>                       |
+        | GLOBAL.Ortelius |      | Auto6666    |                            |            |             |               |                                 |                            |
 

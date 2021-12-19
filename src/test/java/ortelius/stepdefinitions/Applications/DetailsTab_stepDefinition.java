@@ -42,6 +42,6 @@ public class DetailsTab_stepDefinition {
 
     @Then("{actor} is able to see updated values in details tab")
     public void user_is_able_to_see_updated_values_in_details_tab(Actor actor, io.cucumber.datatable.DataTable dataTable) {
-       // actor.attemptsTo(DetailsTab.verifyChangeValues(dataTable));
+      //  actor.attemptsTo(DetailsTab.verifyChangeValues(dataTable));
     }
 }
