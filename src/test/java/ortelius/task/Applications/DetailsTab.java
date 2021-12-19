@@ -13,15 +13,17 @@ import net.serenitybdd.screenplay.conditions.Check;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
+import net.serenitybdd.screenplay.ui.Image;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.core.IsNull;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -30,23 +32,26 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 public class DetailsTab {
 
-    public static Target lstFullDomainName = Target.the("Full Domain Name").located(By.name("fulldomain_val"));
-    public static Target txtName = Target.the("Name").located(By.name("name_val"));
-    public static Target txtDescription = Target.the("Description").located(By.name("summary_val"));
+    public static By lstFullDomainName = By.name("fulldomain_val");
+    public static By txtName = By.name("name_val");
+    public static By txtDescription = By.name("summary_val");
+    public static By lstChangeRequestDataSource = By.name("bt_datasource_val");
+    public static By lstPreAction = By.name("preaction_val");
+    public static By lstPostAction = By.name("postaction_val");
+    public static By lstCustomAction = By.name("customaction_val");
+    public static By lstSuccessfulDeploymentTemplate = By.name("template_val");
+    public static By lstFailedDeploymentTemplate = By.name("fail_template_val");
 
-    public static Target lstChangeRequestDataSource = Target.the("Change Request Data Soruce")
-            .located(By.name("bt_datasource_val"));
-
-    public static Target lstPreAction = Target.the("Pre Action").located(By.name("preaction_val"));
-    public static Target lstPostAction = Target.the("Post Action").located(By.name("postaction_val"));
-    public static Target lstCustomAction = Target.the("Custom Action").located(By.name("customaction_val"));
-
-    public static Target lstSuccessfulDeploymentTemplate = Target.the("Successful Deployment Template")
-            .located(By.name("template_val"));
-
-    public static Target lstFailedDeploymentTemplate = Target.the("Failed Deployment Template")
-            .located(By.name("fail_template_val"));
-
+    // Labels
+    public static By lblFullDomainName = By.xpath("//td[text()='Full Domain:']/following::td[1]");
+    public static By lblName = By.xpath("//td[text()='Name:']/following::td[1]");
+    public static By lblDescription = By.xpath("//td[text()='Description:']/following::td[1]");
+    public static By lblChangeRequestDataSource = By.xpath("//td[text()='Change Request Data Source:']/following::td[1]");
+    public static By lblPreAction = By.xpath("//td[text()='Pre-Action:']/following::td[1]");
+    public static By lblPostAction = By.xpath("//td[text()='Post-Action:']/following::td[1]");
+    public static By lblCustomAction = By.xpath("//td[text()='Custom Action:']/following::td[1]");
+    public static By lblSuccessfulDeploymentTemplate = By.xpath("//td[text()='Successful Deployment Template:']/following::td[1]");
+    public static By lblFailedDeploymentTemplate = By.xpath("//td[text()='Failed Deployment Template:']/following::td[1]");
 
     public static Performable openVersionFromWebTable(String version) {
 
@@ -82,64 +87,15 @@ public class DetailsTab {
 
                 WaitUntil.the(Button.called("Save"), isClickable())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                        .seconds()
+                        .seconds(),
 
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
         );
     }
 
-    public static Performable changeValues(DataTable dataTable) {
 
-        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
-
-        String fullDomainName = details.get(0).get("Full Domain");
-        String name = details.get(0).get("Name");
-        String description = details.get(0).get("Description");
-        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
-        String preAction = details.get(0).get("Pre-Action");
-        String postAction = details.get(0).get("Post-Action");
-        String customAction= details.get(0).get("Custom-Action");
-        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
-        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
-
-        System.out.println(fullDomainName);
-
-        return Task.where("Enter values in Detail tab",
-
-                Check.whether(fullDomainName == "null")
-                        .otherwise(SelectFromOptions.byValue("705")
-                               .from(lstFullDomainName)),
-
-                Check.whether(name == "null")
-                        .otherwise(Enter.theValue(name).into(txtName)),
-
-                Check.whether(description == "null")
-                        .otherwise(Enter.theValue(description).into(txtDescription)),
-
-                Check.whether(changeRequestDataSource == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(changeRequestDataSource)
-                                .from(lstChangeRequestDataSource)),
-
-                Check.whether(preAction == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(preAction)
-                                .from(lstPreAction)),
-
-                Check.whether(postAction == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(postAction)
-                                .from(lstPostAction)),
-
-                Check.whether(customAction == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(customAction)
-                                .from(lstCustomAction)),
-
-                Check.whether(successfullDeploymentTemplate == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(successfullDeploymentTemplate)
-                                .from(lstSuccessfulDeploymentTemplate)),
-
-                Check.whether(failedDeploymentTemplate == "null")
-                        .otherwise(SelectFromOptions.byVisibleText(failedDeploymentTemplate)
-                                .from(lstFailedDeploymentTemplate))
-                );
-    }
 
     public static Performable clickOnSaveButton() {
         return  Task.where("Click on Save Button ", Click.on(Button.called("Save")));
@@ -162,15 +118,66 @@ public class DetailsTab {
         AnonymousPerformableFunction where = Task.where("Verify Details Tab",
 
                 (Consumer<Actor>) seeThat("Verify fullDomainName",
-                        Text.of(lstFullDomainName),
+                        Text.of(lblFullDomainName),
                         CoreMatchers.is(fullDomainName))
         );
 
         AnonymousPerformableFunction where1 = Task.where("Verify Details Tab",
 
                 (Consumer<Actor>) seeThat("Verify Name",
-                        Text.of(txtName),
+                        Text.of(lblName),
                         CoreMatchers.is(name))
         );
     }
+
+    public static Performable changeValues(DataTable dataTable) {
+
+        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
+
+        String fullDomainName = details.get(0).get("Full Domain");
+        String name = details.get(0).get("Name");
+        String description = details.get(0).get("Description");
+        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
+        String preAction = details.get(0).get("Pre-Action");
+        String postAction = details.get(0).get("Post-Action");
+        String customAction= details.get(0).get("Custom-Action");
+        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
+        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
+
+        return  Task.where("Enter values in Details Tab ",
+
+                Check.whether(Objects.nonNull(fullDomainName))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFullDomainName,
+                                fullDomainName)),
+
+                Check.whether(Objects.nonNull(name))
+                        .andIfSo(ReusableMethod.jsEnterValue(txtName, name)),
+
+                Check.whether(Objects.nonNull(description))
+                        .andIfSo(ReusableMethod.jsEnterValue(txtDescription, description)),
+
+                Check.whether(Objects.nonNull(changeRequestDataSource))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstChangeRequestDataSource,
+                                changeRequestDataSource)),
+
+                Check.whether(Objects.nonNull(preAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPreAction,preAction)),
+
+                Check.whether(Objects.nonNull(postAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPostAction,postAction)),
+
+                Check.whether(Objects.nonNull(customAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstCustomAction,customAction)),
+
+                Check.whether(Objects.nonNull(successfullDeploymentTemplate))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstSuccessfulDeploymentTemplate,
+                                successfullDeploymentTemplate)),
+
+                Check.whether(Objects.nonNull(failedDeploymentTemplate))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFailedDeploymentTemplate,
+                                failedDeploymentTemplate))
+        );
+    }
+
 }
+

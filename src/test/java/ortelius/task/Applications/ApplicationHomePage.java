@@ -15,5 +15,4 @@ public class ApplicationHomePage {
     public static String chkSpecificVersion = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]/td[1]";
     public static String chkSpecificRow = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]";
 
-
 }

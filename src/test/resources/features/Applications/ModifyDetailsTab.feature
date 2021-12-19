@@ -12,17 +12,16 @@ Feature: Verify Application Details functionality
 
     Scenario: Modify Details tab
 
-      When User is opened "Hipster Store;July 4th Sale;4 - Testing" version
+      When User is opened "Automation Testing" version
       And User is click on Edit button in details tab
       And User is modified below values in Details tab
 
-        | Full Domain | Name | Description | Change Request Data Source | Pre-Action               | Post-Action              | Custom-Action            | Successfull Deployment Template | Failed Deployment Template |
-        |             |      | Test        |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
+        | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
+        | GLOBAL.Ortelius | <NA> | Auto123     | <NA>                       | <NA>       | <NA>        | <NA>          | <NA>                            | <NA>                       |
 
       And User click on Save button
       Then User is able to see updated values in details tab
 
-        | Full Domain | Name | Description | Change Request Data Source | Pre-Action               | Post-Action              | Custom-Action            | Successfull Deployment Template | Failed Deployment Template |
-        |             |      | Test        |                            | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster | GLOBAL.GKE_ResizeCluster |                                 |                            |
-
+        | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
+        | GLOBAL.Ortelius | <NA> | Auto123     | <NA>                       | <NA>       | <NA>        | <NA>          | <NA>                            | <NA>                       |
 
