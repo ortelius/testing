@@ -110,85 +110,68 @@ public class DetailsTab {
         );
     }
 
-    public static Performable verifyChangeValues(DataTable dataTable) {
+    public static Performable modifyFullDomainName(String fullDomianName) {
 
-        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
-
-        String fullDomainName = details.get(0).get("Full Domain");
-        String name = details.get(0).get("Name");
-        String description = details.get(0).get("Description");
-        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
-        String preAction = details.get(0).get("Pre-Action");
-        String postAction = details.get(0).get("Post-Action");
-        String customAction= details.get(0).get("Custom-Action");
-        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
-        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
-
-        AnonymousPerformableFunction where = Task.where("Verify Details Tab",
-
-                (Consumer<Actor>) seeThat("Verify fullDomainName",
-                        Text.of(lblFullDomainName),
-                        CoreMatchers.is(fullDomainName))
-        );
-
-        AnonymousPerformableFunction where1 = Task.where("Verify Details Tab",
-
-                (Consumer<Actor>) seeThat("Verify Name",
-                        Text.of(lblName),
-                        CoreMatchers.is(name))
-        );
-
-        return null;
+        return  Task.where("Modify Full Domain Name in Details Tab ",
+                Check.whether(Objects.nonNull(fullDomianName))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFullDomainName,
+                                fullDomianName)));
     }
 
-    public static Performable changeValues(DataTable dataTable) {
-
-        List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
-
-        String fullDomainName = details.get(0).get("Full Domain");
-        String name = details.get(0).get("Name");
-        String description = details.get(0).get("Description");
-        String changeRequestDataSource = details.get(0).get("Change Request Data Source");
-        String preAction = details.get(0).get("Pre-Action");
-        String postAction = details.get(0).get("Post-Action");
-        String customAction= details.get(0).get("Custom-Action");
-        String successfullDeploymentTemplate = details.get(0).get("Successfull Deployment Template");
-        String failedDeploymentTemplate = details.get(0).get("Failed Deployment Template");
-
-        return  Task.where("Enter values in Details Tab ",
-
-                Check.whether(Objects.nonNull(fullDomainName))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFullDomainName,
-                                fullDomainName)),
-
+    public static Performable modifyFullName(String name) {
+        return  Task.where("Modify Name in Details Tab ",
                 Check.whether(Objects.nonNull(name))
-                        .andIfSo(ReusableMethod.jsEnterValue(txtName, name)),
+                        .andIfSo(ReusableMethod.jsEnterValue(txtName,
+                                name)));
+    }
 
+    public static Performable modifyDescription(String description) {
+        return  Task.where("Modify Description in Details Tab ",
                 Check.whether(Objects.nonNull(description))
-                        .andIfSo(ReusableMethod.jsEnterValue(txtDescription, description)),
+                        .andIfSo(ReusableMethod.jsEnterValue(txtDescription,
+                                description)));
+    }
 
+    public static Performable modifyChangeRequestDataSource(String changeRequestDataSource) {
+        return  Task.where("Modify Change Request Data Source in Details Tab ",
                 Check.whether(Objects.nonNull(changeRequestDataSource))
                         .andIfSo(ReusableMethod.jsSelectByVisibleText(lstChangeRequestDataSource,
-                                changeRequestDataSource)),
-
-                Check.whether(Objects.nonNull(preAction))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPreAction,preAction)),
-
-                Check.whether(Objects.nonNull(postAction))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPostAction,postAction)),
-
-                Check.whether(Objects.nonNull(customAction))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstCustomAction,customAction)),
-
-                Check.whether(Objects.nonNull(successfullDeploymentTemplate))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstSuccessfulDeploymentTemplate,
-                                successfullDeploymentTemplate)),
-
-                Check.whether(Objects.nonNull(failedDeploymentTemplate))
-                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFailedDeploymentTemplate,
-                                failedDeploymentTemplate))
-        );
+                                changeRequestDataSource)));
     }
 
+    public static Performable modifyPreAction(String preAction) {
+        return  Task.where("Modify Pre Action in Details Tab ",
+                Check.whether(Objects.nonNull(preAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPreAction,
+                                preAction)));
+    }
+
+    public static Performable modifyPostAction(String postAction) {
+        return  Task.where("Modify Post Action in Details Tab ",
+                Check.whether(Objects.nonNull(postAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstPostAction,
+                                postAction)));
+    }
+
+    public static Performable modifyCustomAction(String customAction) {
+        return  Task.where("Modify Custom Action in Details Tab ",
+                Check.whether(Objects.nonNull(customAction))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstCustomAction,
+                                customAction)));
+    }
+
+    public static Performable modifySuccessfullDeploymentTemplate(String successfullDeploymentTemplate) {
+        return  Task.where("Modify successfull Deployment Template in Details Tab ",
+                Check.whether(Objects.nonNull(successfullDeploymentTemplate))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstSuccessfulDeploymentTemplate,
+                                successfullDeploymentTemplate)));
+    }
+
+    public static Performable modifyFailedDeploymentTemplate(String failedDeploymentTemplate) {
+        return  Task.where("Modify failed Deployment Template in Details Tab ",
+                Check.whether(Objects.nonNull(failedDeploymentTemplate))
+                        .andIfSo(ReusableMethod.jsSelectByVisibleText(lstFailedDeploymentTemplate,
+                                failedDeploymentTemplate)));
+    }
 }
 

@@ -29,14 +29,14 @@ public class Login_stepDefinition {
         actor.attemptsTo(GeneralComponents.loginPage());
     }
 
-    @When("{actor} is entered {string} username in username text box")
-    public void user_is_entered_username_in_username_text_box(Actor actor, String username) {
-        actor.attemptsTo(Login.fillUserName(username));
+    @When("{actor} is entered username in username text box")
+    public void user_is_entered_username_in_username_text_box(Actor actor) {
+        actor.attemptsTo(Login.fillUserName(ReusableMethod.getEnvironmentValue("app.username").trim()));
     }
 
-    @When("{actor} is entered {string} password in password text box")
-    public void user_is_entered_password_in_password_text_box(Actor actor, String password) {
-        actor.attemptsTo(Login.fillPassword(password));
+    @When("{actor} is entered password in password text box")
+    public void user_is_entered_password_in_password_text_box(Actor actor) {
+        actor.attemptsTo(Login.fillPassword(ReusableMethod.getEnvironmentValue("app.password").trim()));
     }
 
     @And("{actor} click on login button")
