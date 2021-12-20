@@ -8,6 +8,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import org.openqa.selenium.By;
 import ortelius.task.Applications.DetailsTab;
@@ -40,8 +41,14 @@ public class DetailsTab_stepDefinition {
         actor.attemptsTo(DetailsTab.clickOnSaveButton());
     }
 
-    @Then("{actor} is able to see updated values in details tab")
-    public void user_is_able_to_see_updated_values_in_details_tab(Actor actor, io.cucumber.datatable.DataTable dataTable) {
-      //  actor.attemptsTo(DetailsTab.verifyChangeValues(dataTable));
+    @Then("{actor} is able to see updated {string} value in Full Domain Dropdown")
+    public void user_is_able_to_see_updated_value_in_full_domain_dropdown(Actor actor, String fullDomain) {
+        Ensure.that(DetailsTab.lblFullDomainName).text().isEqualTo(fullDomain);
     }
+
+    @Then("{actor} is able to see updated {string} value in Description text box")
+    public void user_is_able_to_see_updated_value_in_description_text_box(Actor actor, String description) {
+        Ensure.that(DetailsTab.lblDescription).text().isEqualTo(description);
+    }
+
 }

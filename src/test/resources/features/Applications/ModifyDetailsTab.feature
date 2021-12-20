@@ -10,18 +10,19 @@ Feature: Verify Application Details functionality
       And User click on login button
       Then User is able to view Home page
 
-    Scenario: Modify Details tab
+    Scenario Outline: Modify Details tab
 
-      When User is opened "Automation Testing" version
+      When User is opened "<Name>" version
       And User is click on Edit button in details tab
       And User is modified below values in Details tab
 
-        | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
-        | GLOBAL.Ortelius.Online Store Company.Hipster Store.Prod |      | Auto1111    |                            |            |             |               |                                 |                            |
+        | Full Domain                                             | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
+        | GLOBAL.Ortelius.Online Store Company.Hipster Store.Prod |      | Auto1345    |                            |            |             |               |                                 |                            |
 
       And User click on Save button
-      Then User is able to see updated values in details tab
+      Then User is able to see updated "<Full Domain>" value in Full Domain Dropdown
+      Then User is able to see updated "<Description>" value in Description text box
 
-        | Full Domain     | Name | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
-        | GLOBAL.Ortelius |      | Auto6666    |                            |            |             |               |                                 |                            |
-
+      Examples:
+        | Full Domain                                             | Name               | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
+        | GLOBAL.Ortelius.Online Store Company.Hipster Store.Prod | Automation Testing | Auto1345    |                            |            |             |               |                                 |                            |

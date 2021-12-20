@@ -97,10 +97,20 @@ public class DetailsTab {
 
     public static Performable clickOnSaveButton() {
         return  Task.where("Click on Save Button ",
-                Click.on(Button.called("Save")));
+
+                Click.on(Button.called("Save")),
+
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds(),
+
+                WaitUntil.the(Button.called("Edit"), isEnabled())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+        );
     }
 
-    public static void verifyChangeValues(DataTable dataTable) {
+    public static Performable verifyChangeValues(DataTable dataTable) {
 
         List<Map<String, String>> details = dataTable.asMaps(String.class, String.class);
 
@@ -127,6 +137,8 @@ public class DetailsTab {
                         Text.of(lblName),
                         CoreMatchers.is(name))
         );
+
+        return null;
     }
 
     public static Performable changeValues(DataTable dataTable) {
