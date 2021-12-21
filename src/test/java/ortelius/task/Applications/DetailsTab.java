@@ -58,13 +58,11 @@ public class DetailsTab {
         By locCheckbox = By.xpath(ApplicationHomePage.chkSpecificVersion.replace("<VERSION>", version));
         By locRow = By.xpath(ApplicationHomePage.chkSpecificRow.replace("<VERSION>", version));
 
+        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locCheckbox).waitUntilEnabled();
         WebElementFacade chk = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locCheckbox);
         WebElementFacade row = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(locRow);
 
         return  Task.where("{0} Open Specific Version " + version,
-                  WaitUntil.the(CommonObject.iconHangOn, isEmpty())
-                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                        .seconds(),
                   MoveMouse.to(locCheckbox).andThen(action -> action.click(chk)),
                   MoveMouse.to(locRow).andThen(action -> action.doubleClick(row))
             );

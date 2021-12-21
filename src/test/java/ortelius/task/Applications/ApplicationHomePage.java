@@ -12,6 +12,7 @@ public class ApplicationHomePage {
             .located(By.cssSelector("table[id='applist']"));
 
     public static By tblDetail = By.id("summ");
+    public static By tblAllCheckbox = By.id("applist_checkall");
     public static String chkSpecificVersion = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]/td[1]";
     public static String chkSpecificRow = "//table[@id='applist']/descendant::td[text()='<VERSION>']/ancestor::tr[1]";
 

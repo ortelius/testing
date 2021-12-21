@@ -1,4 +1,4 @@
-Feature: Verify Application Details functionality
+Feature: Verify Details Tab functionality
 
   Rule : User is required credentials
 
@@ -33,6 +33,6 @@ Feature: Verify Application Details functionality
       Then User is able to see updated "<Failed Deployment Template>" value in Failed Deployment Template Dropdown
 
       Examples:
-        | Full Domain                                             | Name               | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
-        | GLOBAL.Ortelius.Online Store Company.Hipster Store.Prod | Automation Testing | Auto222    |                            | GLOBAL.dir | GLOBAL.dir  | GLOBAL.dir    | GLOBAL.DeploySuccess            | GLOBAL.DeploySuccess       |
+        | Full Domain     | Name               | Description | Change Request Data Source | Pre-Action | Post-Action | Custom-Action | Successfull Deployment Template | Failed Deployment Template |
+        | GLOBAL.Ortelius | Automation Testing | Auto2222    |                            | GLOBAL.dir | GLOBAL.dir  | GLOBAL.dir    | GLOBAL.DeploySuccess            | GLOBAL.DeploySuccess       |
 

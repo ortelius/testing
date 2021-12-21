@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.ui.Button;
@@ -13,6 +14,7 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ortelius.task.Applications.ApplicationHomePage;
 import ortelius.utilities.ReusableMethod;
 import net.serenitybdd.screenplay.targets.Target;
 
@@ -34,6 +36,10 @@ public class Login {
         public static Performable fillUserName(String userName) {
 
         return Task.where("{0} Enter user name }" + userName,
+
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds(),
 
                 WaitUntil.the(txtUserName, isClickable())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
@@ -62,12 +68,7 @@ public class Login {
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
                         .seconds(),
 
-                Click.on(Button.called("Login")),
-
-                WaitUntil.the(CommonObject.iconHangOn, isEmpty())
-                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
-                         .seconds()
-
+                Click.on(Button.called("Login"))
         );
     }
 }

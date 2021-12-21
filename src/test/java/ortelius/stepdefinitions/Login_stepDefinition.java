@@ -12,7 +12,11 @@ import net.serenitybdd.screenplay.ensure.web.ElementLocated;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import ortelius.task.Applications.ApplicationHomePage;
+import ortelius.task.Applications.DetailsTab;
+import ortelius.task.CommonObject;
 import ortelius.task.GeneralComponents;
 import ortelius.task.Login;
 import ortelius.utilities.ReusableMethod;
@@ -32,11 +36,15 @@ public class Login_stepDefinition {
     @When("{actor} is entered username in username text box")
     public void user_is_entered_username_in_username_text_box(Actor actor) {
         actor.attemptsTo(Login.fillUserName(ReusableMethod.getEnvironmentValue("app.username").trim()));
+        Ensure.that(Login.txtUserName).text()
+                .isEqualTo(ReusableMethod.getEnvironmentValue("app.username").trim());
     }
 
     @When("{actor} is entered password in password text box")
     public void user_is_entered_password_in_password_text_box(Actor actor) {
         actor.attemptsTo(Login.fillPassword(ReusableMethod.getEnvironmentValue("app.password").trim()));
+        Ensure.that(Login.txtPasswrod).text()
+                .isEqualTo(ReusableMethod.getEnvironmentValue("app.password").trim());
     }
 
     @And("{actor} click on login button")
@@ -45,15 +53,13 @@ public class Login_stepDefinition {
     }
 
     @Then("{actor} is able to view Home page")
-    public void userIsAbleToViewHomePage(Actor actor) {
+    public void userIsAbleToViewHomePage(Actor actor) throws InterruptedException {
 
-      //  BrowseTheWeb.as(actor).getDriver().navigate().refresh();
-
-        WaitUntil.the(ApplicationHomePage.tblDomain, isEnabled())
-                .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
+        WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                 .seconds();
 
         actor.should(seeThat(WebElementQuestion.the(ApplicationHomePage.tblDomain),
-                WebElementStateMatchers.isEnabled()));
+                WebElementStateMatchers.isNotEmpty()));
     }
 }
