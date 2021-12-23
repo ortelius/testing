@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class ReusableMethod {
 
@@ -23,21 +24,32 @@ public class ReusableMethod {
         Performable obj = new Performable() {
             @Override
             public <T extends Actor> void performAs(T actor) {
-              //  if(!value.trim().equals("<NA>")) {
                   Performable  performable = (Performable) BrowseTheWeb.as(actor)
                             .evaluateJavascript("arguments[0].value='" + value + "';"
                                     , BrowseTheWeb.as(actor).$(locator));
-               // }
             }
         };
        return obj;
+    }
+
+    public static Performable jsEnterValue(WebElement element, String value)
+    {
+        Performable obj = new Performable() {
+            @Override
+            public <T extends Actor> void performAs(T actor) {
+                Performable  performable = (Performable) BrowseTheWeb.as(actor)
+                        .evaluateJavascript("arguments[0].value='" + value + "';"
+                                ,element);
+            }
+        };
+        return obj;
     }
 
     public static Performable jsSelectByVisibleText(By locator, String value) {
         Performable obj = new Performable() {
             @Override
             public <T extends Actor> void performAs(T actor) {
-              //  if (!value.trim().equals("<NA>")) {
+
                     WebElementFacade select = BrowseTheWeb.as(actor).$(locator);
                     Performable performable = (Performable) BrowseTheWeb.as(actor)
                             .evaluateJavascript(
@@ -46,7 +58,7 @@ public class ReusableMethod {
                                             + "{ if(select.options[i].text == arguments[1])"
                                             + "{ select.options[i].selected = true; } }"
                                     , select, value);
-                //}
+
             }
         };
         return obj;
