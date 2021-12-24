@@ -10,7 +10,7 @@ Feature: Verify Key Value Configuration functionality
       Then User is able to view Home page
       When User is opened "Automation Testing" version
 
-    Scenario Outline: Modify Key Value Configuration tab
+    Scenario Outline: Add Key and Value in Key Value Configuration Table
       When User is click on Add button in Key value configuration tab
       And User is entered "<Name>" value in Name text box in Key value configuration tab
       And User is entered "<Value>" value in Value text box in Key value configuration tab
@@ -19,8 +19,14 @@ Feature: Verify Key Value Configuration functionality
 
       Examples:
         | Name  | Value  |
-        | Name1 | Value1 |
+        | Name7 | Value7 |
 
-
-
+#    Scenario Outline: Delete All Key and Value in Key Value Configuration Table
+#      When <actor> is select all key and value check box
+#      And <actor> is click on Delete button in Key value configuration table
+#      And <actor> is click on Save button in Key value configuration tab
+#      Then <actor> is verify empty table in Key value configuration table
+#      Examples:
+#        | actor |
+#        | User  |
 

@@ -5,11 +5,15 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actions.JavaScriptClick;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ReusableMethod {
 
@@ -63,4 +67,22 @@ public class ReusableMethod {
         };
         return obj;
     }
+
+    public static Performable clickOnAllElement(By locator)
+    {
+        Performable obj = new Performable() {
+            @Override
+            public <T extends Actor> void performAs(T actor) {
+                List<WebElementFacade> elementFacades = BrowseTheWeb.as(actor).$$(locator);
+                // elementFacades.stream().forEach(e -> JavaScriptClick.on(e));
+                // BrowseTheWeb.as(actor).evaluateJavascript("arguments[0].click();", BrowseTheWeb.as(actor).$$(locator).get(0));
+                for (int i=0; i<elementFacades.size()-1;i++)
+                {
+                    BrowseTheWeb.as(actor).evaluateJavascript("arguments[0].click();", BrowseTheWeb.as(actor).$$(locator).get(i));
+                }
+            }
+        };
+        return obj;
+    }
+
 }
