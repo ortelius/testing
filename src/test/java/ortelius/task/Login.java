@@ -2,28 +2,16 @@ package ortelius.task;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
-import net.serenitybdd.screenplay.questions.WebElementQuestion;
+import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import ortelius.task.Applications.ApplicationHomePage;
 import ortelius.utilities.ReusableMethod;
-import net.serenitybdd.screenplay.targets.Target;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 
 
 public class Login {

@@ -1,23 +1,10 @@
 package ortelius.stepdefinitions.Applications;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.SelectFromOptions;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.questions.Text;
-import org.openqa.selenium.By;
 import ortelius.task.Applications.DetailsTab;
-
-import java.util.List;
-import java.util.Map;
-
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.hasValue;
 
 public class DetailsTab_stepDefinition {
 

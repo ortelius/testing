@@ -1,13 +1,11 @@
 package ortelius.task;
 
-import ortelius.utilities.ReusableMethod;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.ui.Button;
-
-import javax.swing.*;
+import ortelius.utilities.ReusableMethod;
 
 public class GeneralComponents {
     public static Performable loginPage()

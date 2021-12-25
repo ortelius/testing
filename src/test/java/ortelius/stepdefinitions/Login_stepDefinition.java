@@ -5,26 +5,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.ensure.web.ElementLocated;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import ortelius.task.Applications.ApplicationHomePage;
-import ortelius.task.Applications.DetailsTab;
 import ortelius.task.CommonObject;
 import ortelius.task.GeneralComponents;
 import ortelius.task.Login;
 import ortelius.utilities.ReusableMethod;
 
-import java.time.Duration;
-
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 
 public class Login_stepDefinition {
 

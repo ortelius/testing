@@ -1,32 +1,22 @@
 package ortelius.task.Applications;
 
-import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.AnonymousPerformableFunction;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.*;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.JavaScriptClick;
+import net.serenitybdd.screenplay.actions.MoveMouse;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.conditions.Check;
-import net.serenitybdd.screenplay.questions.Text;
-import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
-import net.serenitybdd.screenplay.ui.Image;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.core.IsNull;
 import org.openqa.selenium.By;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 

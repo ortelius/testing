@@ -3,30 +3,13 @@ package ortelius.stepdefinitions.Applications;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
-import net.serenitybdd.screenplay.waits.*;
-import net.thucydides.core.annotations.locators.WaitForWebElements;
-import net.thucydides.core.pages.components.HtmlTable;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import ortelius.task.Applications.KeyValueConfigurationTab;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
-
-import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.time.temporal.ChronoUnit.SECONDS;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 
 public class KeyValueConfigurationTab_stepDefinition {
 
@@ -55,9 +38,7 @@ public class KeyValueConfigurationTab_stepDefinition {
         actor.attemptsTo(
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                        .seconds().then(WaitUntil.the(KeyValueConfigurationTab.tblKeyValueConfigNowOfRecords, isVisible())
-                                .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                                .seconds()).then(KeyValueConfigurationTab.verifyKeyAndValue(name, value)));
+                        .seconds().then(KeyValueConfigurationTab.verifyKeyAndValue(name, value)));
     }
 
     @When("{actor} is select all key and value check box")

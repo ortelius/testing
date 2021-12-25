@@ -1,7 +1,8 @@
 package ortelius.task.Applications;
 
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.*;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.JavaScriptClick;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -13,20 +14,23 @@ import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.pages.components.HtmlTable;
 import org.openqa.selenium.By;
-import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 
 public class KeyValueConfigurationTab {
 
-    public static By tblKeyValueConfig = By.cssSelector("table[id='attrib']");
-    public static By tblKeyValueConfigNowOfRecords = By.cssSelector("table[id='attrib'] tr");
+    // public static By tblKeyValueConfig = By.cssSelector("table[id='attrib']");
+
+    public static Target tblKeyValueConfig = Target.the("Key Value Config Table")
+            .located(By.cssSelector("table[id='attrib']"));
+
+    public static Target tblKeyValueConfigNowOfRecords = Target.the("Key Value Config Table with Records")
+            .located(By.cssSelector("table[id='attrib'] tr"));
+
     public static By btnAdd = By.cssSelector("div[id='attrs-panel'] [class='add_button']");
     public static By btnSave = By.cssSelector("div[id='attrs-panel'] [class='save_button']");
     public static By btnDelete = By.cssSelector("div[id='attrs-panel'] [class='delete_button']");
@@ -87,19 +91,13 @@ public class KeyValueConfigurationTab {
 
     public static Performable clickOnSaveButton() {
         return Task.where("Click on Save Button",
-
                 JavaScriptClick.on(btnSave)
-
-//                WaitUntil.the(txtAllName, WebElementStateMatchers.isNotVisible())
-//                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-//                        .seconds()
         );
     }
 
     public static Performable verifyKeyAndValue(String expName, String expValue) {
 
-        HtmlTable table = new HtmlTable(
-                BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).$(tblKeyValueConfig));
+        HtmlTable table = new HtmlTable(tblKeyValueConfig.resolveFor(OnStage.theActorInTheSpotlight()).waitUntilVisible());
 
         return Task.where("{0} name {1} value in Key Value Configuration WebTable",
 
