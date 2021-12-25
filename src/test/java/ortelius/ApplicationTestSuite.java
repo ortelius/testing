@@ -9,5 +9,6 @@ import org.junit.runner.RunWith;
         plugin = {"pretty"},
         features = "src/test/resources/features/Applications/KeyValueConfiguration.feature"
 )
+
 public class ApplicationTestSuite {
 }

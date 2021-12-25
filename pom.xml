@@ -98,7 +98,7 @@
                 <configuration>
                     <includes>
 <!--                        <include>**/*TestSuite.java</include>-->
-                        <include>**/*ApplicationTestSuite.java</include>
+                        <include>**/**/*ApplicationTestSuite.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>

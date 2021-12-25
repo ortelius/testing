@@ -19,8 +19,8 @@ Feature: Verify Key Value Configuration functionality
 
       Examples:
         | Name  | Value  |
-        | Name1 | Value1 |
-        | Name2 | Value2 |
+        | Name3 | Value3 |
+        | Name4 | Value4 |
 
     Scenario Outline: Delete All Key and Value in Key Value Configuration Table
       When <actor> is select all key and value check box
@@ -30,4 +30,3 @@ Feature: Verify Key Value Configuration functionality
       Examples:
         | actor |
         | User  |
-
