@@ -112,7 +112,6 @@ public class DetailsTab_stepDefinition {
     @Then("{actor} is able to see updated {string} value in Failed Deployment Template Dropdown")
     public void user_is_able_to_see_updated_value_in_failed_deployment_template_dropdown(Actor actor, String failedDeploymentTemplate) {
         Ensure.that(DetailsTab.lstFailedDeploymentTemplate).text().isEqualTo(failedDeploymentTemplate);
-        
     }
 
 
