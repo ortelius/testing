@@ -1,11 +1,11 @@
-package ortelius.stepdefinitions.Applications;
+package ortelius.stepdefinitions.applications;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import ortelius.task.Applications.KeyValueConfigurationTab;
+import ortelius.task.applications.KeyValueConfigurationTabPage;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
@@ -15,22 +15,22 @@ public class KeyValueConfigurationTab_stepDefinition {
 
     @When("{actor} is click on Add button in Key value configuration tab")
     public void user_is_click_on_add_button_in_key_value_configuration_tab(Actor actor) {
-        actor.attemptsTo(KeyValueConfigurationTab.clickOnAddButton());
+        actor.attemptsTo(KeyValueConfigurationTabPage.clickOnAddButton());
     }
 
     @When("{actor} is entered {string} value in Name text box in Key value configuration tab")
     public void user_is_entered_value_in_name_text_box_in_key_value_configuration_tab(Actor actor, String name) throws InterruptedException {
-        actor.attemptsTo(KeyValueConfigurationTab.enterName(name));
+        actor.attemptsTo(KeyValueConfigurationTabPage.enterName(name));
     }
 
     @When("{actor} is entered {string} value in Value text box in Key value configuration tab")
     public void user_is_entered_value_in_value_text_box_in_key_value_configuration_tab(Actor actor, String value) {
-        actor.attemptsTo(KeyValueConfigurationTab.enterValue(value));
+        actor.attemptsTo(KeyValueConfigurationTabPage.enterValue(value));
     }
 
     @When("{actor} is click on Save button in Key value configuration tab")
     public void user_is_click_on_save_button_in_key_values_configuration_tab(Actor actor) {
-        actor.attemptsTo(KeyValueConfigurationTab.clickOnSaveButton());
+        actor.attemptsTo(KeyValueConfigurationTabPage.clickOnSaveButton());
     }
 
     @Then("{actor} is able to see {string} and {string} in Key value configuration table")
@@ -38,7 +38,7 @@ public class KeyValueConfigurationTab_stepDefinition {
         actor.attemptsTo(
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                        .seconds().then(KeyValueConfigurationTab.verifyKeyAndValue(name, value)));
+                        .seconds().then(KeyValueConfigurationTabPage.verifyKeyAndValue(name, value)));
     }
 
     @When("{actor} is select all key and value check box")
@@ -47,17 +47,17 @@ public class KeyValueConfigurationTab_stepDefinition {
         actor.attemptsTo(
         WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                 .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                .seconds().then(KeyValueConfigurationTab.clickOnAllCheckBox()));
+                .seconds().then(KeyValueConfigurationTabPage.clickOnAllCheckBox()));
 
     }
 
     @And("{actor} is click on Delete button in Key value configuration table")
     public void userIsClickOnDeleteButtonInKeyValueConfigurationTable(Actor actor) {
-        actor.attemptsTo(KeyValueConfigurationTab.clickOnDeleteButton());
+        actor.attemptsTo(KeyValueConfigurationTabPage.clickOnDeleteButton());
     }
 
     @Then("{actor} is verify empty table in Key value configuration table")
     public void userIsVerifyEmptyTableInKeyValueConfigurationTable(Actor actor) {
-        actor.attemptsTo(KeyValueConfigurationTab.verifyAllKeyAndValueDeletedInTable());
+        actor.attemptsTo(KeyValueConfigurationTabPage.verifyAllKeyAndValueDeletedInTable());
     }
 }

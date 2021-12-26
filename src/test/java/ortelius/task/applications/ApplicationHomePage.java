@@ -1,4 +1,4 @@
-package ortelius.task.Applications;
+package ortelius.task.applications;
 
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;

@@ -1,4 +1,4 @@
-package ortelius.task.Applications;
+package ortelius.task.applications;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Performable;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class KeyValueConfigurationTab {
+public class KeyValueConfigurationTabPage {
 
     // public static By tblKeyValueConfig = By.cssSelector("table[id='attrib']");
 

@@ -1,4 +1,4 @@
-package ortelius.task.Applications;
+package ortelius.task.applications;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Performable;
@@ -20,7 +20,7 @@ import java.util.Objects;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 
-public class DetailsTab {
+public class DetailsTabPage {
 
     public static By lstFullDomainName = By.name("fulldomain_val");
     public static By txtName = By.name("name_val");

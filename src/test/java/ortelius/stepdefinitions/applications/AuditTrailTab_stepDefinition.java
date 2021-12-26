@@ -1,12 +1,10 @@
-package ortelius.stepdefinitions.Applications;
+package ortelius.stepdefinitions.applications;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import ortelius.task.Applications.AuditTrailPage;
-import ortelius.task.Applications.KeyValueConfigurationTab;
+import ortelius.task.applications.AuditTrailPage;
 import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 

@@ -81,6 +81,21 @@
             <version>3.6.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <!-- it's depends on javafaker dependency -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.23</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -97,8 +112,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-<!--                        <include>**/*TestSuite.java</include>-->
-                        <include>**/**/*ApplicationTestSuite.java</include>
+                        <!--                        <include>**/*TestSuite.java</include>-->
+                        <include>**/**/*EndpointsTestSuite.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>

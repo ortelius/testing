@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import ortelius.task.Applications.ApplicationHomePage;
+import ortelius.task.applications.ApplicationHomePage;
 import ortelius.task.CommonObject;
 import ortelius.task.GeneralComponents;
 import ortelius.task.Login;
