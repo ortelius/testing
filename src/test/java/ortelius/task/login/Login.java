@@ -1,4 +1,4 @@
-package ortelius.task;
+package ortelius.task.login;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -8,6 +8,7 @@ import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
+import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;

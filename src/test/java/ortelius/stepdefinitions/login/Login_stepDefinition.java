@@ -1,4 +1,4 @@
-package ortelius.stepdefinitions;
+package ortelius.stepdefinitions.login;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -9,10 +9,10 @@ import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import ortelius.task.applications.ApplicationHomePage;
 import ortelius.task.CommonObject;
 import ortelius.task.GeneralComponents;
-import ortelius.task.Login;
+import ortelius.task.login.Login;
+import ortelius.task.applications.ApplicationHomePage;
 import ortelius.utilities.ReusableMethod;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
