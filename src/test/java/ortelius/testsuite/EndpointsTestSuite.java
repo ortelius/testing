@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         glue = {"ortelius/stepdefinitions"},
-        //features = "src/test/resources/features/Endpoints/"
-        features = "src/test/resources/features/Endpoints/DetailsTab.feature"
+        features = "src/test/resources/features/endpoints/"
+        //features = "src/test/resources/features/endpoints/DetailsTab.feature"
 
 )
 

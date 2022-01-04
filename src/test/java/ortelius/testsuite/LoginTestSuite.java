@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         glue = {"ortelius/stepdefinitions"},
-        features = "src/test/resources/features/Login/Login.feature"
+        features = "src/test/resources/features/login/"
+        //features = "src/test/resources/features/login/Login.feature"
 )
 public class LoginTestSuite {}
