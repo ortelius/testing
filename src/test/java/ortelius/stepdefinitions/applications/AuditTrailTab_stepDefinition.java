@@ -35,4 +35,13 @@ public class AuditTrailTab_stepDefinition {
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                         .seconds().then(AuditTrailPage.verifyMessge(message)));
     }
+
+    @When("{actor} is open {string} Record from application table")
+    public void userIsOpenRecordFromApplicationTable(Actor actor, String recordNumber) {
+
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds().then(AuditTrailPage.openVersionBasedOnRecordNumber(recordNumber)));
+    }
 }

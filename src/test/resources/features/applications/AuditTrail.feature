@@ -8,7 +8,7 @@ Feature: Verify Key Value Configuration functionality
       And User is entered password in password text box
       And User click on login button
       Then User is able to view Home page
-      When User is opened "Automation Testing" version
+      When User is open "1" Record from application table
 
     Scenario Outline: Update value in Audit Trail
       When User is enter "<Message>" value in message in Audit Trail text box

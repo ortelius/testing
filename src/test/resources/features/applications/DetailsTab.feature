@@ -10,7 +10,7 @@ Feature: Verify Details Tab functionality
       Then User is able to view Home page
 
     Scenario Outline: Modify Details tab
-      When User is opened "<Name>" version
+      When User is open "1" Record from application table
       And User is click on Edit button in details tab
       And User is modified "<Full Domain>" value in Full Domain Dropdown
       And User is modified "<Name>" value in Name text box

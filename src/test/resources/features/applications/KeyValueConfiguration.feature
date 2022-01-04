@@ -8,7 +8,7 @@ Feature: Verify Key Value Configuration functionality
       And User is entered password in password text box
       And User click on login button
       Then User is able to view Home page
-      When User is opened "Automation Testing" version
+      When User is open "1" Record from application table
 
     Scenario Outline: Add Key and Value in Key Value Configuration Table
       When User is click on Add button in Key value configuration tab
