@@ -1,20 +1,28 @@
 package ortelius.stepdefinitions.endpoints;
 
+import com.sun.istack.NotNull;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import net.thucydides.core.pages.components.HtmlTable;
 import ortelius.task.CommonObject;
 import ortelius.task.endpoints.DetailsTabPage;
 import ortelius.utilities.ReusableMethod;
 
+import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static org.asynchttpclient.util.MiscUtils.isEmpty;
 import static org.jsoup.internal.StringUtil.isBlank;
+import static ortelius.task.endpoints.DetailsTabPage.tableEndPoint;
 
 public class DetailsTab_stepDefinition {
 
@@ -37,7 +45,7 @@ public class DetailsTab_stepDefinition {
     }
     @When("{actor} is enter {string} value in Name text box")
     public void user_is_enter_value_in_name_text_box(Actor actor, String name) {
-        dynamicName = ReusableMethod.getDynamicString(5);
+        dynamicName = ReusableMethod.getDynamicString(10);
         actor.attemptsTo(
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
@@ -121,13 +129,7 @@ public class DetailsTab_stepDefinition {
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                         .seconds().then(DetailsTabPage.clickOnSaveButtonTab()));
     }
-    @Then("{actor} is able to see {string} value Endpoint Table")
-    public void user_is_able_to_see_value_endpoint_table(Actor actor, String name) {
-          actor.attemptsTo(
-                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
-                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                        .seconds().then(DetailsTabPage.verifyEndpointDetailInTable(isBlank(name) ? dynamicName : name)));
-    }
+
 
     @And("{actor} is click on Add button in Endpoint details tab")
     public void userIsClickOnAddButtonInEndpointDetailsTab(Actor actor) {
@@ -135,9 +137,31 @@ public class DetailsTab_stepDefinition {
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                         .seconds()
-                        .then(WaitUntil.the(DetailsTabPage.tableEndPoint, isEnabled())
-                                .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
-                                .seconds())
                         .then(DetailsTabPage.clickAddButtonEndpointTab()));
+    }
+
+    @Then("{actor} is able to see {string} value Endpoint Table")
+    public void user_is_able_to_see_value_endpoint_table(Actor actor, String name) {
+
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds());
+
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.verifyEndpointDetailInTable(isBlank(name) ? dynamicName : name)));
+    }
+
+    @And("{actor} is select {string} value from Show entry list box")
+    public void userIsSelectValueFromShowEntryListBox(Actor actor, String showEntryOption) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.selectValueFromShowEntriesListBox(showEntryOption))
+        );
     }
 }

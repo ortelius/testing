@@ -25,6 +25,7 @@ Feature: Verify Endpoint functionality
       And User is select "<Ping Failure Template>" value from Ping Failure Template list box
       And User is click on Save button in Endpoint details tab
       And User is click on Endpoints button in Endpoint details tab
+      And User is select "All" value from Show entry list box
       Then User is able to see "<Name>" value Endpoint Table
 
       Examples:

@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         features = "src/test/resources/features/Applications/"
-        //features = "src/test/resources/features/Applications/ModifyDetails.feature"
+        //features = "src/test/resources/features/Applications/DetailsTab.feature"
         //features = "src/test/resources/features/Applications/KeyValueConfiguration.feature"
         //features = "src/test/resources/features/Applications/AuditTrail.feature"
 )

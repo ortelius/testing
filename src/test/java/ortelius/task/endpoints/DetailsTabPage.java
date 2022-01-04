@@ -4,27 +4,32 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Hit;
 import net.serenitybdd.screenplay.actions.JavaScriptClick;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.targets.Target;
-import net.thucydides.core.pages.components.HtmlTable;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
 import ortelius.utilities.ReusableMethod;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DetailsTabPage {
+
+    public static final Target btnNext =
+            Target.the("Next")
+                    .located(By.id("endpointlist_next"));
 
     public static Target tabEndPoint = Target.the("Endpoint Tab")
             .located(By.cssSelector("button[class*='tablinks verttab_endpoint']"));
 
     public static Target tableEndPoint = Target.the("Endpoint Table")
             .located(By.cssSelector("table[id='endpointlist']"));
+
+    public static Target tableEndPointRecord = Target.the("Endpoint Column")
+            .located(By.cssSelector("table[id='endpointlist'] tr td[class='sorting_1']"));
 
     public static Target btnAdd = Target.the("Add Button")
             .located(By.cssSelector("div[id='endpointlist_pane'] button[onclick*='addRow']"));
@@ -67,6 +72,9 @@ public class DetailsTabPage {
 
     public static Target lstPingFailureTemplate = Target.the("Ping Failure Template")
             .located(By.name("template_val"));
+
+    public static Target lstShowEntries = Target.the("Show Entries")
+            .located(By.name("endpointlist_length"));
 
 
     public static Performable clickOnEndpointTab() {
@@ -140,14 +148,12 @@ public class DetailsTabPage {
     }
 
     public static Performable verifyEndpointDetailInTable(String name) {
-
-        HtmlTable table = new HtmlTable(tableEndPoint.resolveFor(BrowseTheWeb.as(OnStage.theActorInTheSpotlight())));
-        List<String> allRowsValues =
-                table.getRowElements().stream().map(e -> e.getText()).collect(Collectors.toList());
-
-        return Task.where("{0} Verify Endpoint Detail in Table" + name,
-                Ensure.that(allRowsValues.stream().anyMatch(s -> s.contains(name))).isTrue()
-
+        return Task.where("{0} Verify Endpoint Detail in Table :" + name,
+                Ensure.that(tableEndPointRecord.resolveAllFor(BrowseTheWeb.as(OnStage.theActorInTheSpotlight())
+                                .waitForAllTextToAppear(name))
+                        .stream().filter(e -> e.getText().contains(name))
+                                .peek(e -> System.out.println("New Created Row : " + e.getText()))
+                        .collect(Collectors.toList())).isNotEmpty()
         );
     }
 
@@ -161,5 +167,13 @@ public class DetailsTabPage {
         return Task.where("Click On Save Button Endpoint Tab",
                 JavaScriptClick.on(btnSave)
         );
+    }
+
+    public static Performable selectValueFromShowEntriesListBox(String showEntryOption) {
+        return Task.where("Select {0} value from Show Entries List Box " + showEntryOption,
+                    SelectFromOptions.byVisibleText(showEntryOption).from(lstShowEntries),
+                    Hit.the(Keys.ENTER).into(lstShowEntries)
+        );
+
     }
 }
