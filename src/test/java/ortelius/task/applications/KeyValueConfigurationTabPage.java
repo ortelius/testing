@@ -10,15 +10,24 @@ import net.serenitybdd.screenplay.conditions.Check;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.targets.Target;
+import net.serenitybdd.screenplay.waits.Wait;
+import net.serenitybdd.screenplay.waits.WaitOnQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import net.serenitybdd.screenplay.waits.WaitUntilTargetIsReady;
+import net.thucydides.core.annotations.locators.WaitForWebElements;
 import net.thucydides.core.pages.components.HtmlTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 
 public class KeyValueConfigurationTabPage {
@@ -26,7 +35,7 @@ public class KeyValueConfigurationTabPage {
     // public static By tblKeyValueConfig = By.cssSelector("table[id='attrib']");
 
     public static Target tblKeyValueConfig = Target.the("Key Value Config Table")
-            .located(By.cssSelector("table[id='attrib']"));
+            .located(By.cssSelector("table[id='attrib']")).waitingForNoMoreThan(Duration.ofSeconds(60));
 
     public static Target tblKeyValueConfigNowOfRecords = Target.the("Key Value Config Table with Records")
             .located(By.cssSelector("table[id='attrib'] tr"));
@@ -95,15 +104,17 @@ public class KeyValueConfigurationTabPage {
         );
     }
 
-    public static Performable verifyKeyAndValue(String expName, String expValue) {
+    public static Performable verifyKeyAndValue(String expName, String expValue)  {
 
-        HtmlTable table = new HtmlTable(tblKeyValueConfig.resolveFor(OnStage.theActorInTheSpotlight()).waitUntilVisible());
+       WaitUntil.the(chkAll, isClickable()).forNoMoreThan(Duration.ofSeconds(60));
+       HtmlTable table = new HtmlTable(tblKeyValueConfig.resolveFor(OnStage.theActorInTheSpotlight()));
 
         return Task.where("{0} name {1} value in Key Value Configuration WebTable",
 
                 Ensure.that(table.getRowElementsFor(new ArrayList<>(List.of("Name")))
                                 .stream()
                                 .filter(e -> e.getText().contains(expName))
+                                .peek(e -> System.out.println(e.getText()))
                                 .findFirst()
                                 .get()
                                 .getText())
@@ -112,6 +123,8 @@ public class KeyValueConfigurationTabPage {
                 Ensure.that(table.getRowElementsFor(new ArrayList<>(List.of("Value")))
                                 .stream()
                                 .filter(e -> e.getText().contains(expValue))
+                                .peek(e -> System.out.println(e.getText()))
+                                .peek(e -> e.getText())
                                 .findFirst()
                                 .get()
                                 .getText())
