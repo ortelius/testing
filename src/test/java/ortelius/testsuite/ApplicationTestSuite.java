@@ -1,0 +1,18 @@
+package ortelius.testsuite;
+
+import io.cucumber.junit.CucumberOptions;
+import net.serenitybdd.cucumber.CucumberWithSerenity;
+import org.junit.runner.RunWith;
+
+@RunWith(CucumberWithSerenity.class)
+@CucumberOptions(
+        plugin = {"pretty"},
+        glue = {"ortelius/stepdefinitions"},
+        features = "src/test/resources/features/applications/"
+        //features = "src/test/resources/features/applications/DetailsTab.feature"
+        //features = "src/test/resources/features/applications/KeyValueConfiguration.feature"
+        //features = "src/test/resources/features/applications/AuditTrail.feature"
+)
+
+public class ApplicationTestSuite {
+}

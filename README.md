@@ -56,4 +56,4 @@ Java - 11 Version,
 Serenity BDD with ScreenPlay Pattern
 
 Support
-https://github.com/ortelius/ortelius/issues
+https://github.com/ortelius/testing/issues
