@@ -27,15 +27,15 @@ jobs:
       - name: Build with Maven
         run: mvn -B verify --file pom.xml -Dheadless.mode=true
 
-      - name: Zip Automation Execution Report
+      - name: Convert Zip file format to Test Automation Execution Report
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
           path: ${{ github.workspace }}/target/site/serenity
           filename: 'Report.zip'
 
-      - name: Upload Artifact
+      - name: Upload Test Automation Execution Report
         uses: actions/upload-artifact@v2
         with:
           name: Test_Automation_Execution_Report
-          path: Report.tar
+          path: Report.zip
