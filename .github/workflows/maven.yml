@@ -31,7 +31,7 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          path: ${{ github.workspace }}/target/site/serenity
+          directory: ${{ github.workspace }}/target/site/serenity
           filename: 'Report.zip'
 
       - name: Upload Test Automation Execution Report
