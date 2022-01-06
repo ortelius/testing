@@ -28,7 +28,7 @@ jobs:
         run: mvn -B verify --file pom.xml -Dheadless.mode=true
 
       - name: Zip Automation Execution Report
-        uses: papeloto/action-zip@v1
+        uses: papeloto/action-zip@v2
         with:
           files: ${{ github.workspace }}/target/site/serenity
           dest: Report.zip
