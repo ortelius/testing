@@ -28,10 +28,11 @@ jobs:
         run: mvn -B verify --file pom.xml -Dheadless.mode=true
 
       - name: Zip Automation Execution Report
-        uses: papeloto/action-zip@v2
+        uses: thedoctor0/zip-release@master
         with:
-          files: ${{ github.workspace }}/target/site/serenity
-          dest: Report.zip
+          type: 'zip'
+          path: ${{ github.workspace }}/target/site/serenity
+          filename: 'Report.zip'
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
