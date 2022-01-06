@@ -37,5 +37,5 @@ jobs:
       - name: Upload Test Automation Execution Report
         uses: actions/upload-artifact@v2
         with:
-          name: Test_Automation_Execution_Report
+          name: Test_Automation_Execution_Report_${{ github.run_number }}
           path: Report.zip
