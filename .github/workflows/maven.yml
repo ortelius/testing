@@ -28,7 +28,7 @@ jobs:
         run: mvn -B verify --file pom.xml -Dheadless.mode=true
 
       - name: Tar files
-        run: tar -cvf Report.tar ${{ github.workspace }}/testing/testing/target/site/serenity
+        run: tar -cvf Report.tar ${{ github.workspace }}/target/site/serenity
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
