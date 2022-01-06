@@ -27,7 +27,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B verify --file pom.xml -Dheadless.mode=true
 
-      - name: Convert Zip file format to Test Automation Execution Report
+      - name: Convert Zip file (Test Automation Report)
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
