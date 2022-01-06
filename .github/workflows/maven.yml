@@ -33,5 +33,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Test_Autoamtion_Execution_Report-name
+          name: 'Test_Automation_Execution_Report_' & ${{ github.run_number }}
           path: Report.tar
