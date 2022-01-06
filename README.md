@@ -19,13 +19,6 @@ Simplifies the path to adopting cloud native development practices without a maj
 Give developers the power to control how their software is released across all environments by defining deployment configurations data that is separate from the definition.
 Deliver transparency into the continuous delivery process by mapping component and microservice relationships with BOM and Difference Reports across deployed environments (clusters, cloud, physical).  
 Serve as a central market place to share microservices with their deployment requirements and versions.
-Ortelius Development Goals for 2021
-Goals for Q1 and Q2 of 2021
-
-Website redesign to support easy contribution (pull request) (Jenkins as an example)
-Improve data graphs and maps
-Increase adoption by adding 'scraping' of AWS, GKE, Azure.
-Goals for the Q3 and Q4 months of 2021
 
 Publish our first global marketplace
 Convert DMScript to Python

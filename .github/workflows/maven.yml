@@ -15,12 +15,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B verify --file pom.xml -Dheadless.mode=true
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B verify --file pom.xml -Dheadless.mode=true
+
+      - name: Convert Zip file (Test Automation Report)
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          path: ${{ github.workspace }}/target/site/serenity
+          filename: 'Report.zip'
+
+      - name: Upload Test Automation Execution Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test_Automation_Execution_Report_${{ github.run_number }}
+          path: Report.zip
