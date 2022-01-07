@@ -1,4 +1,4 @@
-Feature: Verify Details Tab functionality
+Feature: Verify Details Tab functionality in Application Module
 
   Rule : User is required credentials
 

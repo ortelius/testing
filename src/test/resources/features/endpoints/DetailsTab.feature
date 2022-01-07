@@ -1,4 +1,4 @@
-Feature: Verify Endpoint functionality
+Feature: Verify Detail Tab functionality in Endpoint Module
 
   Rule : User is required valid credentials
 
