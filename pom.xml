@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
-        <parallel.tests>2</parallel.tests>
+        <parallel.tests>3</parallel.tests>
         <webdriver.base.url></webdriver.base.url>
     </properties>
     <dependencies>
