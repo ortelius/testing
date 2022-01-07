@@ -34,9 +34,11 @@ public class Login_stepDefinition {
 
     @When("{actor} is entered password in password text box")
     public void user_is_entered_password_in_password_text_box(Actor actor) {
-        actor.attemptsTo(Login.fillPassword(ReusableMethod.getEnvironmentValue("app.password").trim()));
+
+        String appPassword = ReusableMethod.getEnvironmentValue("app.password").trim();
+        actor.attemptsTo(Login.fillPassword(appPassword));
         Ensure.that(Login.txtPasswrod).text()
-                .isEqualTo(ReusableMethod.getEnvironmentValue("app.password").trim());
+                .isEqualTo(appPassword);
     }
 
     @And("{actor} click on login button")
