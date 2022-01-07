@@ -27,9 +27,11 @@ public class Login_stepDefinition {
 
     @When("{actor} is entered username in username text box")
     public void user_is_entered_username_in_username_text_box(Actor actor) {
-        actor.attemptsTo(Login.fillUserName(ReusableMethod.getEnvironmentValue("app.username").trim()));
+
+        String appUsername = ReusableMethod.getEnvironmentValue("app.username").trim();
+        actor.attemptsTo(Login.fillUserName(appUsername));
         Ensure.that(Login.txtUserName).text()
-                .isEqualTo(ReusableMethod.getEnvironmentValue("app.username").trim());
+                .isEqualTo(appUsername);
     }
 
     @When("{actor} is entered password in password text box")
