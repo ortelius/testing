@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
-        <parallel.tests>3</parallel.tests>
+        <parallel.tests>6</parallel.tests>
         <webdriver.base.url></webdriver.base.url>
     </properties>
     <dependencies>
@@ -113,7 +113,7 @@
                 <configuration>
                     <includes>
                         <include>**/*TestSuite.java</include>
-<!--                                                <include>**/**/*EndpointsTestSuite.java</include>-->
+<!--                        <include>**/**/*LoginTestSuite.java</include>-->
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>

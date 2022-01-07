@@ -106,8 +106,8 @@ public class KeyValueConfigurationTabPage {
 
     public static Performable verifyKeyAndValue(String expName, String expValue)  {
 
-       WaitUntil.the(chkAll, isClickable()).forNoMoreThan(Duration.ofSeconds(60));
-       HtmlTable table = new HtmlTable(tblKeyValueConfig.resolveFor(OnStage.theActorInTheSpotlight()));
+        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).waitForAllTextToAppear(expName);
+        HtmlTable table = new HtmlTable(tblKeyValueConfig.resolveFor(OnStage.theActorInTheSpotlight()));
 
         return Task.where("{0} name {1} value in Key Value Configuration WebTable",
 

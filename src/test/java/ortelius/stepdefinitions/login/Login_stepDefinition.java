@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
@@ -54,6 +56,11 @@ public class Login_stepDefinition {
         WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                 .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
                 .seconds();
+
+        // Handle application Sync issue
+        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).waitForTextToDisappear("No data available in table");
+        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).waitForTextToDisappear("Loading");
+        BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).shouldContainText("Deployed");
 
         actor.should(seeThat(WebElementQuestion.the(ApplicationHomePage.tblDomain),
                 WebElementStateMatchers.isNotEmpty()));

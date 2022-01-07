@@ -15,11 +15,11 @@ Feature: Verify Key Value Configuration functionality in Application Module
       And User is entered "<Name>" value in Name text box in Key value configuration tab
       And User is entered "<Value>" value in Value text box in Key value configuration tab
       And User is click on Save button in Key value configuration tab
-     # Then User is able to see "<Name>" and "<Value>" in Key value configuration table
+      Then User is able to see "<Name>" and "<Value>" in Key value configuration table
 
       Examples:
-        | Name   | Value   |
-        | Name19 | Value19 |
+        | Name  | Value  |
+        | Name8 | Value8 |
 
     Scenario Outline: Delete All Key and Value in Key Value Configuration Table
       When <actor> is select all key and value check box

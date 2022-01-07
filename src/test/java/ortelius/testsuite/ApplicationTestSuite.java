@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue = {"ortelius/stepdefinitions"},
         features = "src/test/resources/features/applications/"
         //features = "src/test/resources/features/applications/DetailsTab.feature"
-        //features = "src/test/resources/features/applications/KeyValueConfiguration.feature"
+        // features = "src/test/resources/features/applications/KeyValueConfiguration.feature"
         //features = "src/test/resources/features/applications/AuditTrail.feature"
 )
 

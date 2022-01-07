@@ -24,7 +24,7 @@ public class Login {
 
         public static Performable fillUserName(String userName) {
 
-        return Task.where("{0} Enter user name : " + userName,
+        return Task.where("Enter user name : *****",
 
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
@@ -39,7 +39,7 @@ public class Login {
     }
 
     public static Performable fillPassword(String password) {
-        return Task.where("{0} Enter Password : " + "*****",
+        return Task.where("{0} Enter Password : *****",
 
                 WaitUntil.the(txtPasswrod, isClickable())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
