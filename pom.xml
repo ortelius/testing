@@ -96,6 +96,18 @@
             <version>1.23</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-single-page-report</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-navigator-report</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -105,6 +117,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <skip>true</skip>
+                    <!--                    Fixed - Screenshots and OutOfMemoryError issues-->
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -113,7 +127,7 @@
                 <configuration>
                     <includes>
                         <include>**/*TestSuite.java</include>
-<!--                        <include>**/**/*LoginTestSuite.java</include>-->
+                        <!--                                                <include>**/**/*LoginTestSuite.java</include>-->
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
@@ -122,6 +136,8 @@
                     <threadCount>${parallel.tests}</threadCount>
                     <forkCount>${parallel.tests}</forkCount>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <!--                    Fixed - Screenshots and OutOfMemoryError issues-->
+                    <argLine>-Xmx1024m</argLine>
                 </configuration>
                 <executions>
                     <execution>
@@ -146,7 +162,9 @@
                 <version>${serenity.maven.version}</version>
                 <configuration>
                     <tags>${tags}</tags>
+                    <reports>single-page-html,navigator</reports>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>net.serenity-bdd</groupId>

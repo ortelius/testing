@@ -2,8 +2,10 @@ package ortelius.task.login;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -45,8 +47,8 @@ public class Login {
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
                         .seconds(),
 
-                Enter.theValue(password)
-                        .into(txtPasswrod)
+                ReusableMethod.jsEnterValue(txtPasswrod, password)
+
         );
     }
 

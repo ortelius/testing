@@ -19,6 +19,7 @@ import ortelius.utilities.ReusableMethod;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
+import static ortelius.task.login.Login.txtPasswrod;
 
 public class Login_stepDefinition {
 
@@ -41,7 +42,7 @@ public class Login_stepDefinition {
 
         String appPassword = ReusableMethod.getEnvironmentValue("app.password").trim();
         actor.attemptsTo(Login.fillPassword(appPassword));
-        Ensure.that(Login.txtPasswrod).text()
+        Ensure.that(txtPasswrod).text()
                 .isEqualTo(appPassword);
     }
 

@@ -1,20 +1,27 @@
 package ortelius.task.endpoints;
 
+import io.cucumber.java.af.En;
+import io.cucumber.java.en.But;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Hit;
-import net.serenitybdd.screenplay.actions.JavaScriptClick;
-import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.targets.Target;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import ortelius.task.CommonObject;
 import ortelius.utilities.ReusableMethod;
 
+import java.security.Key;
 import java.util.stream.Collectors;
+
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
+import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 
 public class DetailsTabPage {
 
@@ -76,74 +83,97 @@ public class DetailsTabPage {
     public static Target lstShowEntries = Target.the("Show Entries")
             .located(By.name("endpointlist_length"));
 
+    public static Target tblEndpointTableEmptyRecord = Target.the("Endpoint Table Empty Record")
+            .locatedBy("table[id='endpointlist'] td[class='dataTables_empty']");
+
+    public static Target btnDeleteConfirmationOkButton = Target.the("Delete confirmation Ok button")
+            .locatedBy("//div[@aria-describedby='modal']/descendant::button[2]");
+
+    public static Target btnDelete = Target.the("Delete Button")
+            .located(By.cssSelector("div[id='endpointlist_pane'] button[onclick*='delRow']"));
+
+    public static Target btnAllCheckbox = Target.the("Endpoint Checkbox")
+            .located(By.cssSelector("table[id='endpointlist'] td[class=' select-checkbox']"));
+
+    public static Target lblFilter = Target.the("Endpoint Checkbox")
+            .located(By.cssSelector("div[id='endpointlist_filter_area'] div[class='VS-search-inner'] input"));
+
+    public static Target txtFilter = Target.the("Endpoint Checkbox")
+            .located(By.cssSelector("div[class='search_facet_input_container'] input"));
+
+    public static Target lnkEndPoint = Target.the("Endpoint Link")
+            .located(By.linkText("Endpoint"));
+
+    public static Target lnkClearFilter = Target.the("Clear Filter")
+            .locatedBy("div[id='endpoint_search_box_container'] div[title='clear search']");
 
     public static Performable clickOnEndpointTab() {
         return Task.where("Click On Endpoint Tab",
-                    Click.on(tabEndPoint)
-                );
+                Click.on(tabEndPoint)
+        );
     }
 
     public static Performable selectFullDomainValue(String fullDomain) {
         return Task.where("Click On Endpoint Tab",
-                ReusableMethod.jsSelectByVisibleText(lstFullDomain,fullDomain)
+                ReusableMethod.jsSelectByVisibleText(lstFullDomain, fullDomain)
         );
     }
 
     public static Performable enterName(String name) {
         return Task.where("Enter name",
-                ReusableMethod.jsEnterValue(txtName,name)
+                ReusableMethod.jsEnterValue(txtName, name)
         );
     }
 
     public static Performable enterDescription(String description) {
         return Task.where("Enter Description",
-                ReusableMethod.jsEnterValue(txtDescription,description)
+                ReusableMethod.jsEnterValue(txtDescription, description)
         );
     }
 
     public static Performable selectEndpointOperatingSystem(String endpointOperatingSystem) {
         return Task.where("Select Endpoint Operating System",
-                ReusableMethod.jsSelectByVisibleText(lstEndpointOperatingSystem,endpointOperatingSystem)
+                ReusableMethod.jsSelectByVisibleText(lstEndpointOperatingSystem, endpointOperatingSystem)
         );
     }
 
     public static Performable selectEndpointTypes(String endporintTypes) {
         return Task.where("Select Endpoint Type",
-                ReusableMethod.jsSelectByVisibleText(lstEndpointType,endporintTypes)
+                ReusableMethod.jsSelectByVisibleText(lstEndpointType, endporintTypes)
         );
     }
 
     public static Performable enterHostname(String hostname) {
         return Task.where("Select Hostname Type",
-                ReusableMethod.jsEnterValue(txtHostname,hostname));
+                ReusableMethod.jsEnterValue(txtHostname, hostname));
 
     }
 
     public static Performable selectProtocal(String protocal) {
         return Task.where("Select Protocal",
-                ReusableMethod.jsSelectByVisibleText(lstProtocal,protocal)
+                ReusableMethod.jsSelectByVisibleText(lstProtocal, protocal)
         );
     }
 
     public static Performable enterSSHportNumber(String sshPortNumber) {
         return Task.where("Enter Hostname Type",
-                ReusableMethod.jsEnterValue(txtSSHPortNumber,sshPortNumber));
+                ReusableMethod.jsEnterValue(txtSSHPortNumber, sshPortNumber));
     }
 
     public static Performable enterBaseDirectory(String baseDirectory) {
         return Task.where("Enter Base Directory Type",
-                ReusableMethod.jsEnterValue(txtBaseDirectory,baseDirectory));
+                ReusableMethod.jsEnterValue(txtBaseDirectory, baseDirectory));
     }
 
     public static Performable selectCredential(String credential) {
         return Task.where("Select Credential",
-                ReusableMethod.jsSelectByVisibleText(lstCredential,credential)
+                ReusableMethod.jsSelectByVisibleText(lstCredential, credential)
         );
     }
 
     public static Performable selectPingFailureTemplate(String pingFailureTemplate) {
         return Task.where("Select Ping Failure Template",
-                ReusableMethod.jsSelectByVisibleText(lstPingFailureTemplate,pingFailureTemplate)
+                ReusableMethod.jsSelectByVisibleText(lstPingFailureTemplate, pingFailureTemplate)
         );
     }
 
@@ -152,7 +182,7 @@ public class DetailsTabPage {
                 Ensure.that(tableEndPointRecord.resolveAllFor(BrowseTheWeb.as(OnStage.theActorInTheSpotlight())
                                 .waitForAllTextToAppear(name))
                         .stream().filter(e -> e.getText().contains(name))
-                                .peek(e -> System.out.println("New Created Row : " + e.getText()))
+                        .peek(e -> System.out.println("New Created Row : " + e.getText()))
                         .collect(Collectors.toList())).isNotEmpty()
         );
     }
@@ -171,9 +201,66 @@ public class DetailsTabPage {
 
     public static Performable selectValueFromShowEntriesListBox(String showEntryOption) {
         return Task.where("Select {0} value from Show Entries List Box " + showEntryOption,
-                    SelectFromOptions.byVisibleText(showEntryOption).from(lstShowEntries),
-                    Hit.the(Keys.ENTER).into(lstShowEntries)
+
+                // Clear Existing Filter
+                Click.on(lnkClearFilter),
+
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds(),
+
+                SelectFromOptions.byVisibleText(showEntryOption).from(lstShowEntries),
+                Hit.the(Keys.ENTER).into(lstShowEntries)
         );
 
+    }
+
+    public static Performable verifyMessageInEndpointTable(String message) {
+        return Task.where("Verify message in Endpoint Table :" + message,
+                WaitUntil.the(tblEndpointTableEmptyRecord, WebElementStateMatchers.containsText(message))
+                        .forNoMoreThan(10).seconds(),
+                Ensure.that(tblEndpointTableEmptyRecord).textContent().contains(message));
+
+    }
+
+    public static Performable clickOkButtonInConfirmationPopUp() {
+        return Task.where("Click on Ok Button Delete Confirmation Pop Up",
+                Click.on(btnDeleteConfirmationOkButton));
+    }
+
+    public static Performable clickOnDeleteButtonInEndpointTab() {
+        return Task.where("Click Delete Button",
+                Click.on(btnDelete));
+    }
+
+    public static Performable selectCheckboxinEndpointWebTable(String recordNumber) {
+
+        WebElementFacade element = btnAllCheckbox.resolveAllFor(BrowseTheWeb.as(OnStage.theActorInTheSpotlight()))
+                .get(Integer.valueOf(recordNumber) - 1);
+
+        return Task.where("Select CheckBox",
+                Click.on(element));
+    }
+
+    public static Performable filterEndPointInEndpointWebTable(String endPointName) {
+        return Task.where("Filter Endpoint Name",
+
+                // Clear Existing Filter
+                Click.on(lnkClearFilter),
+
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds(),
+
+                Hit.the(Keys.ARROW_DOWN).into(lblFilter),
+
+                WaitUntil.the(lnkEndPoint, WebElementStateMatchers.isVisible()).forNoMoreThan(10).seconds(),
+
+                Click.on(lnkEndPoint),
+
+                Enter.keyValues(endPointName).into(txtFilter).thenHit(Keys.ENTER),
+
+                WaitUntil.the(btnAllCheckbox, WebElementStateMatchers.isVisible()).forNoMoreThan(10).seconds()
+        );
     }
 }

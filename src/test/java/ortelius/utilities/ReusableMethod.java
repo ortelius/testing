@@ -7,12 +7,11 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.targets.Target;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class ReusableMethod {
 
@@ -32,6 +31,7 @@ public class ReusableMethod {
     {
         Performable obj = new Performable() {
             @Override
+            @Step("{0} enter value:")
             public <T extends Actor> void performAs(T actor) {
                   Performable  performable = (Performable) BrowseTheWeb.as(actor)
                             .evaluateJavascript("arguments[0].value='" + value + "';"
@@ -45,6 +45,7 @@ public class ReusableMethod {
     {
         Performable obj = new Performable() {
             @Override
+            @Step("{0} enter value:")
             public <T extends Actor> void performAs(T actor) {
                 Performable  performable = (Performable) BrowseTheWeb.as(actor)
                         .evaluateJavascript("arguments[0].value='" + value + "';"
@@ -58,6 +59,7 @@ public class ReusableMethod {
     {
         Performable obj = new Performable() {
             @Override
+            @Step("{0} enter value:")
             public <T extends Actor> void performAs(T actor) {
                 Performable  performable = (Performable) BrowseTheWeb.as(actor)
                         .evaluateJavascript("arguments[0].value='" + value + "';"
@@ -70,6 +72,7 @@ public class ReusableMethod {
     public static Performable jsSelectByVisibleText(By locator, String value) {
         Performable obj = new Performable() {
             @Override
+            @Step("{0} select value from Dropdown:")
             public <T extends Actor> void performAs(T actor) {
 
                     WebElementFacade select = BrowseTheWeb.as(actor).$(locator);
@@ -89,6 +92,7 @@ public class ReusableMethod {
     public static Performable jsSelectByVisibleText(Target target, String value) {
         Performable obj = new Performable() {
             @Override
+            @Step("{0} select value from Dropdown:")
             public <T extends Actor> void performAs(T actor) {
 
                 WebElementFacade select = target.resolveFor(actor);

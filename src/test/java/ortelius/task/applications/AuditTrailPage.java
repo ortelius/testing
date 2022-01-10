@@ -8,13 +8,19 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.targets.Target;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
+
+import java.time.Duration;
+
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.containsText;
 
 public class AuditTrailPage {
 
@@ -28,7 +34,8 @@ public class AuditTrailPage {
             .located(By.id("addMessage"));
 
     public static Target lblFirstEvent = Target.the("First Event Message")
-            .located(By.xpath("//td[contains(text(),'less than a minute ago by')]"));
+            .located(By.xpath("//td[contains(text(),'less than a minute ago by')]"))
+            .waitingForNoMoreThan(Duration.ofSeconds(10));
 
     public static Performable enterValueInMessageTextBox(String message) {
         return Task.where("Enter value in Audit Trail text box",
@@ -42,6 +49,7 @@ public class AuditTrailPage {
 
     public static Performable verifyMessge(String message) {
         return Task.where("Verify Message",
+                WaitUntil.the(lblFirstEvent, containsText(message)).forNoMoreThan(10).seconds(),
                 Ensure.that(Text.of(lblFirstEvent)).contains(message));
     }
 
