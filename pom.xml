@@ -127,7 +127,7 @@
                 <configuration>
                     <includes>
                         <include>**/*TestSuite.java</include>
-                        <!--                                                <include>**/**/*LoginTestSuite.java</include>-->
+<!--                        <include>**/**/*LoginTestSuite.java</include>-->
                     </includes>
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
