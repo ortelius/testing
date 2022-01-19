@@ -1,4 +1,4 @@
-Feature: Verify Key Value Configuration functionality
+Feature: Verify Audit Trail functionality in Application Module
 
   Rule : User is required valid credentials
 

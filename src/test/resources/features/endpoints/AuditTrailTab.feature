@@ -1,4 +1,4 @@
-Feature: Verify Detail Tab functionality in Endpoint Module
+Feature: Verify Audit Trail Tab functionality in Endpoint Module
 
   Rule : User is required valid credentials
 
@@ -9,7 +9,7 @@ Feature: Verify Detail Tab functionality in Endpoint Module
       And User click on login button
       Then User is able to view Home page
 
-    Scenario Outline: Create a new Endpoint and Delete it
+    Scenario Outline: Create a new Endpoint and Update Audit Trail Details
       When User is click on Endpoints button in Endpoint details tab
       And User is click on Add button in Endpoint details tab
       And User is select "<Full Domain>" value from Full Domain list box
@@ -24,6 +24,13 @@ Feature: Verify Detail Tab functionality in Endpoint Module
       And User is select "<Credential>" value from Credential list box
       And User is select "<Ping Failure Template>" value from Ping Failure Template list box
       And User is click on Save button in Endpoint details tab
+
+      #Update Audit Trail Message
+      When User is enter "Testing" value in message in Audit Trail text box
+      And User is click on Add Message button in Audit Trail tab
+      Then User is able to see "Testing" value in Event details tab
+
+      #Move to Endpoint tab
       And User is click on Endpoints button in Endpoint details tab
       And User is select "All" value from Show entry list box
       Then User is able to see "<Name>" value Endpoint Table

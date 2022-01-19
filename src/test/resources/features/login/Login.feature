@@ -1,4 +1,4 @@
-Feature: Verify Login Scenario
+Feature: Verify Login Scenario functionality
 
   Rule : User is required credentials
 

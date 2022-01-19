@@ -2,8 +2,10 @@ package ortelius.task.login;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -24,7 +26,7 @@ public class Login {
 
         public static Performable fillUserName(String userName) {
 
-        return Task.where("{0} Enter user name }" + userName,
+        return Task.where("Enter user name : *****",
 
                 WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
@@ -39,14 +41,14 @@ public class Login {
     }
 
     public static Performable fillPassword(String password) {
-        return Task.where("{0} Enter Password }" + password,
+        return Task.where("{0} Enter Password : *****",
 
                 WaitUntil.the(txtPasswrod, isClickable())
                         .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("minWait").trim()))
                         .seconds(),
 
-                Enter.theValue(password)
-                        .into(txtPasswrod)
+                ReusableMethod.jsEnterValue(txtPasswrod, password)
+
         );
     }
 

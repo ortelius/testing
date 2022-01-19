@@ -164,4 +164,46 @@ public class DetailsTab_stepDefinition {
                         .then(DetailsTabPage.selectValueFromShowEntriesListBox(showEntryOption))
         );
     }
+
+    @When("{actor} is able to filter {string} on Endpoints table")
+    public void user_is_able_to_filter_on_endpoints_table(Actor actor, String endPointName) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.filterEndPointInEndpointWebTable(isBlank(endPointName) ? dynamicName : endPointName)));
+    }
+    @When("{actor} is select {string} checkbox on Endpoints table")
+    public void user_is_select_checkbox_on_endpoints_table(Actor actor, String recordNumber) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.selectCheckboxinEndpointWebTable(recordNumber)));
+    }
+    @When("{actor} is click on Delete button in Endpoint details tab")
+    public void user_is_click_on_delete_button_in_endpoint_details_tab(Actor actor) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.clickOnDeleteButtonInEndpointTab()));
+        
+    }
+    @When("{actor} is click on Ok button in Delete confirmation pop up in Endpoint details tab")
+    public void user_is_click_on_ok_button_in_delete_confirmation_pop_up_in_endpoint_details_tab(Actor actor) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.clickOkButtonInConfirmationPopUp()));
+    }
+    @Then("{actor} is able to see {string} word in Endpoints table")
+    public void user_is_able_to_see_word_in_endpoints_table(Actor actor, String message) {
+        actor.attemptsTo(
+                WaitUntil.the(CommonObject.iconHangOn, isNotVisible())
+                        .forNoMoreThan(Integer.valueOf(ReusableMethod.getEnvironmentValue("maxWait").trim()))
+                        .seconds()
+                        .then(DetailsTabPage.verifyMessageInEndpointTable(message)));
+    }
 }
